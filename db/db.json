@@ -1,11 +1,36 @@
 {
-    "user": [
-        {
-            "id" :0,
-            "name" : "Saurabh",
-            "lastName" : "Dass",
-            "email" : "dass@gmail.com",
-            "phone": "7011675698"
-        }
-    ]
+  "user": [
+    {
+      "id": 1,
+      "name": "Saurabhs",
+      "surname": "Dass",
+      "email": "dass@gmail.com",
+      "phone": "7011675692",
+      "status": true
+    },
+    {
+      "name": "pankaj",
+      "surname": "jha",
+      "phone": "7011675633",
+      "email": "de@gmail.com",
+      "status": true,
+      "id": 2
+    },
+    {
+      "name": "test",
+      "surname": "data",
+      "phone": "70166565656",
+      "email": "s@gmail.com",
+      "status": true,
+      "id": 3
+    },
+    {
+      "name": "raja",
+      "surname": "nath",
+      "phone": "70565656565",
+      "email": "s@Gmail.com",
+      "status": true,
+      "id": 4
+    }
+  ]
 }

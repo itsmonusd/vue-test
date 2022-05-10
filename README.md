@@ -29,5 +29,20 @@ npm install -g json-server
 ```
 json-server db.json
 ```
+
+### Run command for modaltor installation
+```
+npm install vue-modaltor --save
+```
+
+### Run command for form validation
+```
+npm install vee-validate --save
+```
+### Run command for http request axios
+```
+npm install axios
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

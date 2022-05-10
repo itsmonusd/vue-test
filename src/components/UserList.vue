@@ -23,7 +23,7 @@
                                             <div class="col-md-12" style="border-bottom:1px solid grey;padding:16px;">
                                                 <div class="d-flex justify-content-between">
                                                     <h4>Users</h4>
-                                                    <button class="btn btn-primary">Create User</button>
+                                                    <button class="btn btn-primary" @click="showModal">Create User</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mr-auto p-4">
@@ -104,6 +104,8 @@
     } from "vue-property-decorator";
     @Component
     export default class UserList extends Vue {
-
+        showModal(){
+            this.$emit('showUserModal',true);
+        }
     }
 </script>
