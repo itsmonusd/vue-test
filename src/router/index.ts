@@ -10,6 +10,11 @@ const routes: Array<RouteConfig> = [
     component: ()=> import(/* webpackChunkName: "home" */ "@/views/HomeView.vue"),
    
   },
+  {
+    path : '/edituser/:userId',
+    name : 'editUser',
+    component: ()=> import(/* webpackChunkName: "edit" */ "@/views/EditUser.vue"),
+  }
 ]
 
 const router = new VueRouter({
