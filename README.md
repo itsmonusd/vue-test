@@ -20,5 +20,14 @@ npm run build
 npm run test:unit
 ```
 
+### Run command for fake json server installation
+```
+npm install -g json-server
+```
+
+### Run json-server
+```
+json-server db.json
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
