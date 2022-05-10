@@ -4,22 +4,24 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": true,
+    "strictNullChecks":false,
     "sourceMap": true,
+    "noImplicitAny": false,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "jest"
+      "webpack-env"
     ],
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@/assets/*": [
+        "src/assets/*"
       ]
     },
     "lib": [
