@@ -13,9 +13,6 @@
         <div class="cv">
           <div>
             <div class="inbox">
-              <div class="inbox-sb">
-
-              </div>
               <div class="inbox-bx container-fluid" style="background: #e8e8e8;">
                 <div class="row">
 
@@ -84,12 +81,13 @@
                                   <td><b>{{data.phone}}</b></td>
                                   <td>{{data.status}}</td>
                                   <td>  <router-link :to="{ name: 'editUser', params: { userId : data.id }}">
-                                        Edit
+                                        <i class="fa fa-pencil text-primary"></i>
                                     </router-link>
+                                    | <a href="javascript:void(0);" @click="deleteUser(data.id)"><i class="fa fa-trash text-danger"></i></a>
                                   </td>
                                 </tr>
                               </template>
-                              <template>
+                              <template v-else>
                                 <tr>
                                   <td>No Data Found</td>
                                 </tr>
@@ -111,9 +109,8 @@
         </div>
       </div>
 
-<!-- modal for save user -->
-      <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true">
+      <!-- modal for save user -->
+      <div class="modal fade" id="userModal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -124,7 +121,7 @@
             </div>
             <div class="modal-body">
               <form @submit.prevent="validAndSave('user')" autocomplete="off" data-vv-scope="user" ref="userSave">
-                <div class="sign-in-wrapper">
+                <div class="text-left">
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" data-vv-name="name" v-model="newUser.name"
@@ -180,21 +177,15 @@
     Vue
   } from 'vue-property-decorator';
   import Axios, { AxiosError } from "axios";
-    import {
-        Validator
-    } from 'vee-validate';
+  import { Validator } from 'vee-validate';
   import Sidebar from '@/components/Sidebar.vue';
-  import Modal from "@/components/modal/Modal.vue";
   import $ from "jquery";
   @Component({
     components: {
-      Sidebar,
-      Modal
+      Sidebar
     },
   })
   export default class HomeView extends Vue {
-    
-    public showAddUserModal = false;
     public newUser = {
       name: "",
       surname: "",
@@ -204,10 +195,7 @@
     }
     public userData = [];
 
-    showModal() {
-      this.showAddUserModal = true;
-    }
-
+    // validate and save user information
     async validAndSave(scope) {
       
         let result = await this.$validator.validateAll(scope);
@@ -218,18 +206,23 @@
        await Axios.post('http://localhost:3000/user', {
           ...this.newUser,
         }).then((result)=>{
-          alert('success')
-          $('#userModal').modal('hide');
-          this.getUserData();
-          // if (this.$refs.userSave instanceof HTMLFormElement) {
-          //     this.$refs.userSave.clear();
-          //   }
+          console.log(result);
+          if(result.status==201){
+            this.$swal('Data Saved');
+            $('#userModal').modal('hide');
+            this.getUserData();
+          }else{
+            this.$swal('Data Saved Failed');
+          }
         }).catch((error)=>{
-          alert('error');
+          if(error){
+            this.$swal('Something went worng try again later !');
+          }
         });
 
     }
 
+    // get user data
     async getUserData(){
       try {
         let response = await Axios.get('http://localhost:3000/user')
@@ -243,9 +236,46 @@
       }
     }
 
+    // delete user
+    async deleteUser(userId){
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Axios.delete('http://localhost:3000/user/'+userId).then((result)=>{
+            if(result.status==200){
+              this.$swal.fire(
+                'Deleted!',
+                'User has been deleted.',
+                'success'
+              )
+            }
+
+            // fetch again user data
+            this.getUserData();
+
+          }).catch((error)=>{
+            if(error){
+              this.$swal.fire(
+                'Deleted!',
+                'Failed to delete user.',
+                'success'
+              )
+            }
+          })
+          
+        }
+      })
+    }
+
     mounted(){
-      this.getUserData();
-      
+      this.getUserData(); 
     }
   }
 </script>

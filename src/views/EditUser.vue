@@ -8,17 +8,19 @@
                 <div class="cv">
                     <div>
                         <div class="inbox">
-                            <div class="inbox-sb">
-
-                            </div>
                             <div class="inbox-bx container-fluid" style="background: #e8e8e8;">
                                 <div class="row">
                                     <div class="col-md-10 offset-md-2 p-0">
+                                        <ol class="breadcrumb bg-light mt-4">
+                                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page"><router-link to="/">User</router-link></li>
+                                            <li class="breadcrumb-item active" aria-current="page">{{newUser.name}}</li>
+                                        </ol>
                                         <div class="container">
                                             <div class="row mt-4">
-                                                <form class="w-50" @submit.prevent="validAndSave('user')"
+                                                <form class="w-50 mx-auto" @submit.prevent="validAndSave('user')"
                                                     autocomplete="off" data-vv-scope="user" ref="userSave">
-                                                    <div class="sign-in-wrapper">
+                                                    <div class="text-left">
                                                         <div class="form-group">
                                                             <label for="name">Name</label>
                                                             <input type="text" class="form-control" data-vv-name="name"
